@@ -51,6 +51,18 @@ export default function App() {
     });
   }
 
+  function searchJoke() {
+    fetch('https://api.chucknorris.io/jokes/search?query=' + searchText)
+    .then (response => response.json())
+    .then(json => {
+     console.log(json.result[0].value);
+     setMytext(json.result[0].value);
+    })
+    .catch(error => {
+     console.log("Nu blev det fel");
+    });
+  }
+
 
 
    useEffect(() =>{
@@ -75,7 +87,11 @@ export default function App() {
       value ={searchText}
       onChangeText = {setSearchText}/>
 
-      
+    <Button title='Search' onPress={() =>{
+     searchJoke();
+    }}
+    />
+
 
 
       <Text>{mynumber}</Text>
