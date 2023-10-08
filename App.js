@@ -2,11 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { FlatList } from 'react-native';
+import { TextInput } from 'react-native';
 
 export default function App() {
   const [mytext, setMytext] =useState("Hej Hej");
   const [mynumber,setmynumber] = useState(0);
   const [categories, setCategories] = useState (["Appelsin, Bannan"]);
+  const [searchText, setSearchText] = useState ("Söka");
   
   
   function loadjoke() {
@@ -34,7 +36,7 @@ export default function App() {
 
 
 
-  function loadJokeForCategory(){
+  function loadJokeForCategory(jokecat){
 
     console.log ("nu ladda från kategori");
     console.log(jokecat);
@@ -67,9 +69,17 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text style={styles.butttonStyle}>{mytext}</Text>
+      <Text style={styles.jokeStyleStyle}>{mytext}</Text>
+
+     <TextInput
+      value ={searchText}
+      onChangeText = {setSearchText}/>
+
+      
+
+
       <Text>{mynumber}</Text>
-      <Button title='plus' onPress ={() => {
+      <Button  title='plus' onPress ={() => {
         setmynumber(mynumber+1);
       }}/>
 
@@ -78,6 +88,7 @@ export default function App() {
       }
       
     }/>
+
 
     <FlatList 
     data ={categories}
@@ -102,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding:100,
   },
-  butttonStyle :{
+  jokeStyle :{
     color:'green',
     backgroundColor:'lightblue',
   }
