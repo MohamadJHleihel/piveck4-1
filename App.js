@@ -55,13 +55,22 @@ export default function App() {
     fetch('https://api.chucknorris.io/jokes/search?query=' + searchText)
     .then (response => response.json())
     .then(json => {
-     console.log(json.result[0].value);
-     setMytext(json.result[0].value);
+  
+      console.log(json.total);
+
+      if(json.total==0){
+        setMytext("No jokes foumnd!");
+   
+      } else{
+       console.log(json.result[0].value);
+       setMytext(json.result[0].value);
+      }
     })
     .catch(error => {
      console.log("Nu blev det fel");
     });
   }
+
 
 
 
